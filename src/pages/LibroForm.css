@@ -1,0 +1,55 @@
+
+.form-container {
+    margin-top: 40px !important; 
+    margin-bottom: 40px !important; 
+}
+
+.form-paper {
+    padding: 32px !important; 
+    border-radius: 12px !important;
+}
+
+.form-title {
+    margin-bottom: 24px !important; 
+    font-weight: bold !important;
+    color: #333;
+}
+
+.form-grid {
+    display: grid !important;
+    gap: 24px !important; 
+}
+
+.form-row {
+    display: flex !important;
+    gap: 16px !important; 
+}
+
+.upload-area {
+    background-color: #f9f9f9 !important;
+    padding: 16px !important; 
+    border-radius: 8px !important;
+    border: 1px dashed #ccc !important;
+}
+
+.upload-caption {
+    margin-bottom: 8px !important; 
+    font-weight: bold !important;
+}
+
+.button-group {
+    margin-top: 16px !important; 
+    display: flex !important;
+    gap: 16px !important; 
+}
+
+.btn-submit {
+    background-color: #00AEEF !important;
+    padding-top: 12px !important; 
+    padding-bottom: 12px !important;
+    color: white !important;
+}
+
+.btn-submit:hover {
+    background-color: #008dc1 !important;
+}

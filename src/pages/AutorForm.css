@@ -1,0 +1,51 @@
+.autor-form-container {
+    margin-top: 40px !important; 
+    margin-bottom: 40px !important; 
+}
+
+.autor-form-paper {
+    padding: 32px !important; 
+    border-radius: 12px !important;
+}
+
+/* Titulo del formulario */
+.autor-form-title {
+    margin-bottom: 24px !important; 
+    color: #333;
+}
+
+/* Estructura de grid para los campos */
+.autor-form-grid {
+    display: grid !important;
+    gap: 24px !important; 
+}
+
+/* Area de la foto */
+.autor-upload-area {
+    padding: 16px !important; 
+    background-color: #f9f9f9 !important;
+    border-radius: 8px !important;
+    border: 1px dashed #ccc !important;
+}
+
+.autor-upload-caption {
+    margin-bottom: 8px !important; 
+}
+
+.autor-form-buttons {
+    margin-top: 16px !important; 
+    display: flex !important;
+    gap: 16px !important; 
+}
+
+/* Boton de guardar */
+.btn-autor-submit {
+    background-color: #00AEEF !important;
+    color: white !important;
+    text-transform: none !important;
+    box-shadow: none !important;
+}
+
+.btn-autor-submit:hover {
+    background-color: #008dc1 !important;
+}

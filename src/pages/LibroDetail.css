@@ -1,0 +1,52 @@
+/* Contenedor principal */
+.detail-container {
+    margin-top: 40px !important; 
+    margin-bottom: 40px !important; 
+}
+
+/* tittulo el nombre */
+.detail-title {
+    font-weight: bold !important;
+    text-transform: capitalize;
+}
+
+.detail-subtitle {
+    margin-top: 24px !important; 
+    margin-bottom: 16px !important; 
+    font-weight: 500 !important; 
+}
+
+/* Lista de detalles */
+.detail-list {
+    margin-bottom: 32px !important; 
+    padding-left: 24px !important; 
+    list-style-type: disc;
+}
+
+.detail-list li {
+    margin-bottom: 8px !important; 
+}
+
+/* Contenedor de la imagen */
+.detail-image-box {
+    margin-bottom: 32px !important; 
+}
+
+.detail-image {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Boton de Volver */
+.btn-back {
+    background-color: #00AEEF !important;
+    padding: 12px 32px !important; 
+    color: white !important;
+}
+
+.btn-back:hover {
+    background-color: #008dc1 !important;
+}

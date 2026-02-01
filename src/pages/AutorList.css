@@ -1,0 +1,29 @@
+.autor-list-container {
+    margin-top: 32px !important; 
+}
+
+/* Titulo Autores */
+.autor-list-title {
+    margin-bottom: 0 !important; 
+}
+
+/* Contenedor del encabezado */
+.autor-header-box {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 32px !important; 
+}
+
+/* Boton Agregar Autor*/
+.btn-add-autor {
+    background-color: #00AEEF !important;
+    color: white !important;
+    text-transform: none !important;
+    box-shadow: none !important;
+    border-radius: 20px !important; 
+}
+
+.btn-add-autor:hover {
+    background-color: #008dc1 !important;
+}

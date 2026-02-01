@@ -1,0 +1,48 @@
+/* AutorCard.css */
+.autor-card {
+    height: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+    border-radius: 8px !important;
+}
+
+/* Título del autor nombre y apellido */
+.autor-card-title {
+    font-weight: bold !important;
+    font-size: 1.2rem !important;
+}
+
+.autor-card-content {
+    flex-grow: 1;
+}
+
+.autor-card-actions {
+    padding: 16px !important;
+}
+
+/* Botones */
+.btn-square {
+    border-radius: 4px !important;
+    width: 38px !important;
+    height: 38px !important;
+    color: white !important;
+    transition: opacity 0.2s;
+}
+
+.btn-square:hover {
+    opacity: 0.8 !important;
+}
+
+/* Colores */
+.btn-view {
+    background-color: #0097D7 !important;
+}
+
+.btn-edit {
+    background-color: #00AEEF !important;
+}
+
+.btn-delete {
+    background-color: #E14C56 !important;
+}
