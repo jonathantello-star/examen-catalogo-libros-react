@@ -12,6 +12,9 @@ export default function AutorDetail() {
   const navigate = useNavigate();
   const [autor, setAutor] = useState(null);
   
+  // Verificamos si hay token para mostrar/ocultar botones
+  const isLoggedIn = !!localStorage.getItem("access_token");
+  
   const mediaUrl = import.meta.env.VITE_MEDIA_URL || 'http://127.0.0.1:8000';
 
   const loadAutor = useCallback(async () => {
@@ -34,13 +37,13 @@ export default function AutorDetail() {
         alert("Autor eliminado con éxito");
         navigate("/autores");
       } catch (error) {
+        console.log(error);
         alert("Error al eliminar.");
       }
     }
   };
 
   if (!autor) return (
-    // Nombre de la clase
     <Container className="autor-detail-container">
       <Typography>Cargando detalles...</Typography>
     </Container>
@@ -51,7 +54,6 @@ export default function AutorDetail() {
     : "https://via.placeholder.com/300x450?text=Sin+Foto";
 
   return (
-    // Nombre de la clase
     <Container maxWidth="md" className="autor-detail-container">
       {/* Titulo: nombre completo */}
       <Typography variant="h3" className="autor-detail-title">
@@ -95,40 +97,46 @@ export default function AutorDetail() {
         <img 
           src={imageUrl} 
           alt={`${autor.nombre} ${autor.apellido}`} 
-          className="autor-detail-image" // CAMBIO 3: Clase actualizada
+          className="autor-detail-image"
           style={{ display: 'block', margin: '0 auto', maxWidth: '100%', height: 'auto', borderRadius: '8px' }}
         />
       </Box>
 
       {/* Botones */}
       <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 4, mb: 4 }}>
+        {/* El boton de volver siempre se muestra */}
         <Button 
           variant="contained" 
           startIcon={<ArrowBackIcon />}
           onClick={() => navigate("/autores")} 
-          className="btn-autor-back" // CAMBIO 4: Clase actualizada
+          className="btn-autor-back"
           sx={{ bgcolor: '#ccc', color: '#333', '&:hover': { bgcolor: '#bbb' } }}
         >
           Volver
         </Button>
 
-        <Button 
-          variant="contained" 
-          startIcon={<EditIcon />}
-          onClick={() => navigate(`/autores/edit/${autor.id}`)}
-          sx={{ bgcolor: '#00AEEF', color: 'white', '&:hover': { bgcolor: '#008ec3' } }}
-        >
-          Editar
-        </Button>
+        {/* Los botones editar y eliminar solo si hay sesion iniciada */}
+        {isLoggedIn && (
+          <>
+            <Button 
+              variant="contained" 
+              startIcon={<EditIcon />}
+              onClick={() => navigate(`/autores/edit/${autor.id}`)}
+              sx={{ bgcolor: '#00AEEF', color: 'white', '&:hover': { bgcolor: '#008ec3' } }}
+            >
+              Editar
+            </Button>
 
-        <Button 
-          variant="contained" 
-          startIcon={<DeleteIcon />}
-          onClick={handleDelete}
-          sx={{ bgcolor: '#ff4d4d', color: 'white', '&:hover': { bgcolor: '#cc0000' } }}
-        >
-          Eliminar
-        </Button>
+            <Button 
+              variant="contained" 
+              startIcon={<DeleteIcon />}
+              onClick={handleDelete}
+              sx={{ bgcolor: '#ff4d4d', color: 'white', '&:hover': { bgcolor: '#cc0000' } }}
+            >
+              Eliminar
+            </Button>
+          </>
+        )}
       </Stack>
     </Container>
   );

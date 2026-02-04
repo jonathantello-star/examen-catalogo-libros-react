@@ -13,20 +13,20 @@ export default function LibroDetail() {
   const [libro, setLibro] = useState(null);
   const [nombreAutor, setNombreAutor] = useState("Cargando..."); 
   
+  // Verificamos si hay token para mostrar/ocultar botones
+  const isLoggedIn = !!localStorage.getItem("access_token");
+
   const mediaUrl = import.meta.env.VITE_MEDIA_URL || 'http://127.0.0.1:8000';
 
   const loadLibro = useCallback(async () => {
     try {
-      
       const libroData = await fetchLibroById(id);
       setLibro(libroData);
 
-      
       const listaAutores = await fetchAutores();
       const autorEncontrado = listaAutores.find(a => a.id === libroData.autor);
       
       if (autorEncontrado) {
-        
         const completo = `${autorEncontrado.nombre} ${autorEncontrado.apellido || ''}`.trim();
         setNombreAutor(completo);
       } else {
@@ -48,6 +48,7 @@ export default function LibroDetail() {
         alert("Eliminado con éxito");
         navigate("/libros");
       } catch (error) {
+        console.log(error);
         alert("Error al eliminar.");
       }
     }
@@ -92,7 +93,6 @@ export default function LibroDetail() {
             </Typography>
         </Box>
       )}
-      {/* ------------------------------ */}
 
       {/* Imagen */}
       <Box 
@@ -109,6 +109,7 @@ export default function LibroDetail() {
 
       {/* Botones */}
       <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 4, mb: 4 }}>
+        {/* el boton de volver siempre se muestra */}
         <Button 
           variant="contained" 
           startIcon={<ArrowBackIcon />}
@@ -119,23 +120,28 @@ export default function LibroDetail() {
           Volver
         </Button>
 
-        <Button 
-          variant="contained" 
-          startIcon={<EditIcon />}
-          onClick={() => navigate(`/libros/edit/${libro.id}`)}
-          sx={{ bgcolor: '#00AEEF', color: 'white', '&:hover': { bgcolor: '#008ec3' } }}
-        >
-          Editar
-        </Button>
+        {/* Los botones editar y eliminar solo si hay sesion iniciada */}
+        {isLoggedIn && (
+          <>
+            <Button 
+              variant="contained" 
+              startIcon={<EditIcon />}
+              onClick={() => navigate(`/libros/edit/${libro.id}`)}
+              sx={{ bgcolor: '#00AEEF', color: 'white', '&:hover': { bgcolor: '#008ec3' } }}
+            >
+              Editar
+            </Button>
 
-        <Button 
-          variant="contained" 
-          startIcon={<DeleteIcon />}
-          onClick={handleDelete}
-          sx={{ bgcolor: '#ff4d4d', color: 'white', '&:hover': { bgcolor: '#cc0000' } }}
-        >
-          Eliminar
-        </Button>
+            <Button 
+              variant="contained" 
+              startIcon={<DeleteIcon />}
+              onClick={handleDelete}
+              sx={{ bgcolor: '#ff4d4d', color: 'white', '&:hover': { bgcolor: '#cc0000' } }}
+            >
+              Eliminar
+            </Button>
+          </>
+        )}
       </Stack>
     </Container>
   );

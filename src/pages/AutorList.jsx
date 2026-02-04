@@ -31,6 +31,7 @@ export default function AutorList() {
                 });
                 setAutores(autores.filter(a => a.id !== id));
             } catch (error) {
+                console.log(error);
                 alert("No se pudo eliminar el autor.");
             }
         }
@@ -59,7 +60,7 @@ export default function AutorList() {
 
             <Grid container spacing={3}>
                 {autores.map((autor) => (
-                    <Grid item key={autor.id} xs={12} sm={6} md={4} lg={3}>
+                    <Grid key={autor.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                         <AutorCard 
                             autor={autor} 
                             onDelete={handleDelete}

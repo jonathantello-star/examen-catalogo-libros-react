@@ -31,6 +31,7 @@ export default function LibroList() {
                 });
                 setLibros(libros.filter(l => l.id !== id));
             } catch (error) {
+                console.log(error);
                 alert("No se pudo eliminar el libro.");
             }
         }
@@ -59,7 +60,7 @@ export default function LibroList() {
 
             <Grid container spacing={3}>
                 {libros.map((libro) => (
-                    <Grid item key={libro.id} xs={12} sm={6} md={4} lg={3}>
+                    <Grid key={libro.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                         <LibroCard 
                             libro={libro} 
                             onDelete={handleDelete}

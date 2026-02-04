@@ -10,10 +10,17 @@ import LibroDetail from "./pages/LibroDetail";
 import AutorDetail from "./pages/AutorDetail"; 
 import "./App.css";
 
-function App() {
-  // Verificamos si hay un token. Si no hay mandamos al login
-  const isAuthenticated = !!localStorage.getItem("access_token");
 
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = !!localStorage.getItem("access_token");
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
+function App() {
   return (
     <Router>
       <Header />
@@ -21,20 +28,26 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
 
-          {/* Rutas de Libros */}
-          <Route path="/libros" element={isAuthenticated ? <LibroList /> : <Navigate to="/login" />} />
-          <Route path="/libros/new" element={isAuthenticated ? <LibroForm /> : <Navigate to="/login" />} />
-          <Route path="/libros/edit/:id" element={isAuthenticated ? <LibroForm /> : <Navigate to="/login" />} />
-          <Route path="/libros/:id" element={isAuthenticated ? <LibroDetail /> : <Navigate to="/login" />} />
+          {/* --- RUTAS DE LIBROS --- */}
+          {/* publicas */}
+          <Route path="/libros" element={<LibroList />} />
+          <Route path="/libros/:id" element={<LibroDetail />} />
+          
+          {/* privadas */}
+          <Route path="/libros/new" element={<ProtectedRoute><LibroForm /></ProtectedRoute>} />
+          <Route path="/libros/edit/:id" element={<ProtectedRoute><LibroForm /></ProtectedRoute>} />
 
-          {/* Rutas de Autores */}
-          <Route path="/autores" element={isAuthenticated ? <AutorList /> : <Navigate to="/login" />} />
-          <Route path="/autores/new" element={isAuthenticated ? <AutorForm /> : <Navigate to="/login" />} />
-          <Route path="/autores/edit/:id" element={isAuthenticated ? <AutorForm /> : <Navigate to="/login" />} />
-          {/* 2. IMPORTANTE: Agregué esta ruta para que funcione el botón del "Ojo" */}
-          <Route path="/autores/:id" element={isAuthenticated ? <AutorDetail /> : <Navigate to="/login" />} />
 
-          {/* eedireccion automatica */}
+          {/* --- RUTAS DE AUTORES --- */}
+          {/* publicas */}
+          <Route path="/autores" element={<AutorList />} />
+          <Route path="/autores/:id" element={<AutorDetail />} />
+          
+          {/* privadas */}
+          <Route path="/autores/new" element={<ProtectedRoute><AutorForm /></ProtectedRoute>} />
+          <Route path="/autores/edit/:id" element={<ProtectedRoute><AutorForm /></ProtectedRoute>} />
+
+          {/*  */}
           <Route path="/" element={<Navigate to="/libros" />} />
         </Routes>
       </main>
