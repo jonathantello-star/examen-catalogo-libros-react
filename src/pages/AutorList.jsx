@@ -9,6 +9,8 @@ import './AutorList.css';
 export default function AutorList() {
     const [autores, setAutores] = useState([]);
     const navigate = useNavigate();
+    // Verificamos si está logueado
+    const isAuthenticated = !!localStorage.getItem("access_token");
 
     useEffect(() => {
         const fetchAutores = async () => {
@@ -38,24 +40,23 @@ export default function AutorList() {
     };
 
     return (
-        // autor-list-container
         <Container maxWidth="lg" className="autor-list-container">
-            {/* autor-header-box */}
             <Box className="autor-header-box">
-                {/*autor-list-title */}
                 <Typography variant="h4" fontWeight="bold" className="autor-list-title">
                     Catálogo de Autores
                 </Typography>
                 
-                <Button 
-                    variant="contained" 
-                    startIcon={<AddIcon />}
-                    onClick={() => navigate('/autores/new')}
-                    //btn-add-autor
-                    className="btn-add-autor"
-                >
-                    Agregar Autor
-                </Button>
+                {/* SOLO MOSTRAMOS EL BOTÓN SI ESTÁ LOGUEADO */}
+                {isAuthenticated && (
+                    <Button 
+                        variant="contained" 
+                        startIcon={<AddIcon />}
+                        onClick={() => navigate('/autores/new')}
+                        className="btn-add-autor"
+                    >
+                        Agregar Autor
+                    </Button>
+                )}
             </Box>
 
             <Grid container spacing={3}>

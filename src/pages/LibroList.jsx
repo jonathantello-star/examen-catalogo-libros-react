@@ -9,6 +9,8 @@ import './LibroList.css';
 export default function LibroList() {
     const [libros, setLibros] = useState([]);
     const navigate = useNavigate();
+    // Verificamos si está logueado
+    const isAuthenticated = !!localStorage.getItem("access_token");
 
     useEffect(() => {
         const fetchLibros = async () => {
@@ -38,24 +40,23 @@ export default function LibroList() {
     };
 
     return (
-        // libro-list-container
         <Container maxWidth="lg" className="libro-list-container">
-            {/* libro-header-box */}
             <Box className="libro-header-box">
-                {/* libro-list-title */}
                 <Typography variant="h4" fontWeight="bold" className="libro-list-title">
                     Catálogo de Libros
                 </Typography>
                 
-                <Button 
-                    variant="contained" 
-                    startIcon={<AddIcon />}
-                    onClick={() => navigate('/libros/new')}
-                    // btn-add-libro
-                    className="btn-add-libro"
-                >
-                    Agregar Libro
-                </Button>
+                {/* SOLO MOSTRAMOS EL BOTÓN SI ESTÁ LOGUEADO */}
+                {isAuthenticated && (
+                    <Button 
+                        variant="contained" 
+                        startIcon={<AddIcon />}
+                        onClick={() => navigate('/libros/new')}
+                        className="btn-add-libro"
+                    >
+                        Agregar Libro
+                    </Button>
+                )}
             </Box>
 
             <Grid container spacing={3}>
